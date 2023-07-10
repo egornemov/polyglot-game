@@ -1,5 +1,6 @@
 package com.egornemov.polyglotgame.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.egornemov.polyglotgame.PGApplication
 import com.egornemov.polyglotgame.R
 
 class ScoreCardFragment : Fragment() {
+    lateinit var target: Map<String, Int>
     lateinit var fullScore: Map<String, Int>
     var score = 0
     var total = 0
@@ -27,25 +29,40 @@ class ScoreCardFragment : Fragment() {
         val btnRestart = view.findViewById<Button>(R.id.btn_restart)
         val btnShareResults = view.findViewById<Button>(R.id.btn_share_results)
 
-        val langScore = fullScore.keys.size
-        val langList = fullScore.keys
+        val normalizedScore = fullScore.filter { target[it.key] == it.value }
+        val langScore = normalizedScore.keys.size
+        val langList = normalizedScore.keys
         val isPolyglot = langScore >= POLYGLOT_THRESHOLD
-        tvScore.text = "You score is $score of $total with $langScore languages detected ($langList)\nYou are ${if (isPolyglot)  "a NATURAL" else "NOT a"} polyglot"
+        tvScore.text = "You score is $score of $total with $langScore languages detected ($langList)\n" +
+                "${if (langScore == 0) "Just start with English." else "You are ${if (isPolyglot)  "a NATURAL" else "NOT a"} polyglot"}"
 
         btnRestart.setOnClickListener {
             activity?.run {
                 (application as PGApplication).serviceLocator.mainCoordinator
                     .restart(
-                        this,
                         (application as PGApplication).serviceLocator.data
                     )
             }
         }
         btnShareResults.setOnClickListener {
-            Toast.makeText(context, "USE SCREENSHOT FOR SHARING", Toast.LENGTH_SHORT).show()
+            val content = if (langScore == 0) {
+                "I will learn English this year! Do you know English?"
+            } else if (isPolyglot) {
+                "I'm a NATURAL polyglot. I know ${langList.reduce { acc, s -> acc + ", " + s }}.\nBet that you're not?"
+            } else {
+                "I'm NOT a polyglot.\nBet that you are NOT a polyglot too?"
+            }
+            shareContent(content)
         }
 
         return view
+    }
+
+    private fun shareContent(content: String) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, content)
+        startActivity(Intent.createChooser(intent, "Share via"))
     }
 
     companion object {

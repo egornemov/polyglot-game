@@ -19,16 +19,18 @@ class MainCoordinator {
     private lateinit var fragmentManager: FragmentManager
     fun quizCard(activity: FragmentActivity, tracks: List<Track>) {
         fragmentManager = activity.supportFragmentManager
-        navigateToQuizCard(tracks, 1, 0, emptyMap(), tracks.size, true)
+        val target = calculateTarget(tracks)
+        navigateToQuizCard(tracks, target, 1, 0, emptyMap(), tracks.size, true)
     }
 
-    fun nextStep(tracks: List<Track>, step: Int, score: Int, fullScore: Map<String, Int>, total: Int) {
-        navigateToQuizCard(tracks, step, score, fullScore, total)
+    fun nextStep(tracks: List<Track>, target: Map<String, Int>, step: Int, score: Int, fullScore: Map<String, Int>, total: Int) {
+        navigateToQuizCard(tracks, target, step, score, fullScore, total)
     }
 
-    private fun navigateToQuizCard(tracks: List<Track>, step: Int, score: Int, fullScore: Map<String, Int>, total: Int, isFirst: Boolean = false) {
+    private fun navigateToQuizCard(tracks: List<Track>, target: Map<String, Int>, step: Int, score: Int, fullScore: Map<String, Int>, total: Int, isFirst: Boolean = false) {
         if (tracks.isEmpty()) {
             val scoreCard = ScoreCardFragment()
+            scoreCard.target = target
             scoreCard.score = score
             scoreCard.fullScore = fullScore
             scoreCard.total = total
@@ -38,6 +40,7 @@ class MainCoordinator {
             quizCard.targetTrack = tracks[0]
             quizCard.restOfTracks = tracks.filterIndexed { index, _ -> index > 0 }
             quizCard.step = step
+            quizCard.target = target
             quizCard.score = score
             quizCard.fullScore = fullScore
             quizCard.total = total
@@ -64,16 +67,17 @@ class MainCoordinator {
             .commit()
     }
 
-    private fun popFragment() {
-        fragmentManager.popBackStack()
+    fun restart(tracks: List<Track>) {
+        val target = calculateTarget(tracks)
+        navigateToQuizCard(tracks, target, 1, 0, emptyMap(), tracks.size, false)
     }
 
-    private fun swapFragment(fragment: Fragment) {
-        popFragment()
-        addFragment(fragment)
-    }
-
-    fun restart(activity: FragmentActivity, tracks: List<Track>) {
-        navigateToQuizCard(tracks, 1, 0, emptyMap(), tracks.size, false)
+    private fun calculateTarget(tracks: List<Track>): Map<String, Int> {
+        return mutableMapOf<String, Int>().apply {
+            tracks.forEach {
+                val item: Int = get(it.answer) ?: 0
+                this[it.answer] = item + 1
+            }
+        }
     }
 }

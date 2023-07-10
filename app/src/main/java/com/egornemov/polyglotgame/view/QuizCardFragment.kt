@@ -19,6 +19,7 @@ import java.util.Timer
 import java.util.TimerTask
 
 class QuizCardFragment : Fragment() {
+    lateinit var target: Map<String, Int>
     lateinit var fullScore: Map<String, Int>
     lateinit var restOfTracks: List<Track>
     lateinit var targetTrack: Track
@@ -45,6 +46,8 @@ class QuizCardFragment : Fragment() {
         val btnChoiceB = view.findViewById<Button>(R.id.btn_choice_b)
         val btnChoiceC = view.findViewById<Button>(R.id.btn_choice_c)
         val btnChoiceD = view.findViewById<Button>(R.id.btn_choice_d)
+        val btnChoiceE = view.findViewById<Button>(R.id.btn_choice_e)
+        val btnChoiceF = view.findViewById<Button>(R.id.btn_choice_f)
 
         val tvCardDescription = view.findViewById<TextView>(R.id.tv_card_description)
         val pbMediaplayerInit = view.findViewById<ProgressBar>(R.id.pb_mediaplayer_init)
@@ -110,12 +113,17 @@ class QuizCardFragment : Fragment() {
             }
         }
 
-        initChoices(listOf(btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD), targetTrack)
+        initChoices(listOf(btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD,
+//            btnChoiceE, btnChoiceF,
+            ), targetTrack)
 
         return view
     }
 
     private fun initChoices(buttons: List<Button>, targetTrack: Track) {
+        buttons.forEach {
+            it.isVisible = true
+        }
         val list = mutableListOf<Pair<String, Boolean>>()
         list.apply {
             add(targetTrack.answer to true)
@@ -132,7 +140,7 @@ class QuizCardFragment : Fragment() {
                     (activity?.application as PGApplication)
                         .serviceLocator
                         .mainCoordinator
-                        .nextStep(restOfTracks, step + 1, score + if (pair.second) 1 else 0,
+                        .nextStep(restOfTracks, target, step + 1, score + if (pair.second) 1 else 0,
                             fullScore.toMutableMap().apply {
                                 if (pair.second) {
                                     val prevScore: Int = get(pair.first) ?: 0
