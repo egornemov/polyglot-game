@@ -41,6 +41,7 @@ class QuizCardFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_quiz_card, container, false)
 
+        val btnRestart = view.findViewById<Button>(R.id.btn_restart)
         val btnPlay = view.findViewById<Button>(R.id.btn_play)
         val btnChoiceA = view.findViewById<Button>(R.id.btn_choice_a)
         val btnChoiceB = view.findViewById<Button>(R.id.btn_choice_b)
@@ -59,6 +60,15 @@ class QuizCardFragment : Fragment() {
         }
 
         mediaPlayer?.setDataSource(targetTrack.url)
+
+        btnRestart.setOnClickListener {
+            activity?.run {
+                (application as PGApplication).serviceLocator.mainCoordinator
+                    .restart(
+                        (application as PGApplication).serviceLocator.data
+                    )
+            }
+        }
 
         btnPlay.setOnClickListener {
             pbMediaplayerInit.isVisible = true

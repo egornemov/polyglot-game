@@ -33,8 +33,11 @@ class ScoreCardFragment : Fragment() {
         val langScore = normalizedScore.keys.size
         val langList = normalizedScore.keys
         val isPolyglot = langScore >= POLYGLOT_THRESHOLD
+
+        val languageToLearn: String = target.keys.shuffled().first()
+
         tvScore.text = "You score is $score of $total with $langScore languages detected ($langList)\n" +
-                "${if (langScore == 0) "Just start with English." else "You are ${if (isPolyglot)  "a NATURAL" else "NOT a"} polyglot"}"
+                "${if (langScore == 0) "Just start with $languageToLearn." else "You are ${if (isPolyglot)  "a NATURAL" else "NOT a"} polyglot"}"
 
         btnRestart.setOnClickListener {
             activity?.run {
@@ -46,7 +49,7 @@ class ScoreCardFragment : Fragment() {
         }
         btnShareResults.setOnClickListener {
             val content = if (langScore == 0) {
-                "I will learn English this year! Do you know English?"
+                "I will learn $languageToLearn this year! Do you know $languageToLearn?"
             } else if (isPolyglot) {
                 "I'm a NATURAL polyglot. I know ${langList.reduce { acc, s -> acc + ", " + s }}.\nBet that you're not?"
             } else {

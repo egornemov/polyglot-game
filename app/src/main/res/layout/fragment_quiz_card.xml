@@ -1,83 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <Button
+        android:id="@+id/btn_restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="RESET GAME"/>
 
-        <TextView
-            android:id="@+id/tv_card_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="STEP 0"/>
+    <TextView
+        android:id="@+id/tv_card_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_restart"
+        android:textSize="24sp"
+        android:text="STEP 0"/>
 
-        <Button
-            android:id="@+id/btn_play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="PLAY"/>
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="PLAY"/>
 
-        <Button
-            android:id="@+id/btn_choice_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            android:text="CHOICE A"/>
+    <Button
+        android:id="@+id/btn_choice_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btn_choice_c"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="CHOICE A"/>
 
-        <Button
-            android:id="@+id/btn_choice_b"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            android:text="CHOICE B"/>
+    <Button
+        android:id="@+id/btn_choice_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btn_choice_c"
+        app:layout_constraintStart_toEndOf="@+id/btn_choice_a"
+        android:text="CHOICE B"/>
 
-        <Button
-            android:id="@+id/btn_choice_c"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            android:text="CHOICE C"/>
+    <Button
+        android:id="@+id/btn_choice_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btn_choice_e"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="CHOICE C"/>
 
-        <Button
-            android:id="@+id/btn_choice_d"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            android:text="CHOICE D"/>
+    <Button
+        android:id="@+id/btn_choice_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btn_choice_e"
+        app:layout_constraintStart_toEndOf="@+id/btn_choice_c"
+        android:visibility="gone"
+        android:text="CHOICE D"/>
 
 
-        <Button
-            android:id="@+id/btn_choice_e"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            android:text="CHOICE E"/>
+    <Button
+        android:id="@+id/btn_choice_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        android:text="CHOICE E"/>
 
-        <Button
-            android:id="@+id/btn_choice_f"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            android:text="CHOICE F"/>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn_choice_f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_choice_e"
+        android:visibility="gone"
+        android:text="CHOICE F"/>
 
     <ProgressBar
         android:id="@+id/pb_mediaplayer_init"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"/>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
