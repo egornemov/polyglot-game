@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -28,6 +29,7 @@ class QuizCardFragment : Fragment() {
     var total = 0
 
     private var mediaPlayer: MediaPlayer? = MediaPlayer()
+    private var startPosition: Int = 0
 
     companion object {
         const val DURATION_S = 20
@@ -41,8 +43,9 @@ class QuizCardFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_quiz_card, container, false)
 
-        val btnRestart = view.findViewById<Button>(R.id.btn_restart)
-        val btnPlay = view.findViewById<Button>(R.id.btn_play)
+        val btnRestart = view.findViewById<ImageButton>(R.id.btn_restart)
+        val btnPlay = view.findViewById<ImageButton>(R.id.btn_play)
+        val tvPlay = view.findViewById<TextView>(R.id.tv_play)
         val btnChoiceA = view.findViewById<Button>(R.id.btn_choice_a)
         val btnChoiceB = view.findViewById<Button>(R.id.btn_choice_b)
         val btnChoiceC = view.findViewById<Button>(R.id.btn_choice_c)
@@ -70,56 +73,64 @@ class QuizCardFragment : Fragment() {
             }
         }
 
+        pbMediaplayerInit.isVisible = true
+        btnPlay.isEnabled = false
+        btnPlay.isClickable = false
+
+        mediaPlayer?.prepareAsync()
+        mediaPlayer?.setOnPreparedListener { mp ->
+
+            pbMediaplayerInit.isVisible = false
+            btnPlay.isEnabled = true
+            btnPlay.isClickable = true
+
+            startPosition = mp.duration / 8 + Random().nextInt(mp.duration / 2)
+            mp.seekTo(startPosition)
+        }
+
         btnPlay.setOnClickListener {
-            pbMediaplayerInit.isVisible = true
             btnPlay.isEnabled = false
             btnPlay.isClickable = false
+            tvPlay.isVisible = true
 
-            mediaPlayer?.prepareAsync()
-            mediaPlayer?.setOnPreparedListener { mp ->
+            mediaPlayer?.start()
 
-                pbMediaplayerInit.isVisible = false
+            val mainLooper = activity?.mainLooper
+            mainLooper?.run {
+                val handler = Handler(this)
+                val positionUpdater = Timer()
+                val positionUpdate = object : TimerTask() {
 
-                val duration = DURATION_MS //mp.duration
-                val startPosition = mp.duration / 8 + Random().nextInt(mp.duration / 2)
-                mp.seekTo(startPosition)
-                mp.start()
+                    var count = 0
 
-                val mainLooper = activity?.mainLooper
-                mainLooper?.run {
-                    val handler = Handler(this)
-                    val positionUpdater = Timer()
-                    val positionUpdate = object : TimerTask() {
-
-                        var count = 0
-
-                        override fun run() {
-                            count++
-                            handler.post {
-                                if (count > DURATION_S) {
-                                    btnPlay.text = "PLAY"
-                                    positionUpdater.purge()
-                                } else {
-                                    btnPlay.text = "PLAYING ($count of $DURATION_S)"
-                                }
+                    override fun run() {
+                        count++
+                        handler.post {
+                            if (count > DURATION_S) {
+                                positionUpdater.purge()
+                                tvPlay.text = ""
+                                tvPlay.isVisible = false
+                                count = 0
+                            } else {
+                                tvPlay.text = "PLAYING ($count of $DURATION_S)"
                             }
                         }
                     }
-                    positionUpdater.scheduleAtFixedRate(positionUpdate, 1000, 1000)
-
-
-
-                    // Stop playback after the desired duration
-                    handler.postDelayed({
-                        if (mediaPlayer != null) {
-                            mp.pause()
-                            mp.seekTo(startPosition) // Reset position for future playback
-
-                            btnPlay.isEnabled = true
-                            btnPlay.isClickable = true
-                        }
-                    }, duration.toLong())
                 }
+                positionUpdater.scheduleAtFixedRate(positionUpdate, 1000, 1000)
+
+
+
+                // Stop playback after the desired duration
+                handler.postDelayed({
+                    if (mediaPlayer != null) {
+                        mediaPlayer?.pause()
+                        mediaPlayer?.seekTo(startPosition) // Reset position for future playback
+
+                        btnPlay.isEnabled = true
+                        btnPlay.isClickable = true
+                    }
+                }, DURATION_MS.toLong())
             }
         }
 
@@ -140,7 +151,6 @@ class QuizCardFragment : Fragment() {
             targetTrack.choices.filter { it != targetTrack.answer }.shuffled().subList(0, 3).map { it to false }.let { it ->
                 addAll(it)
             }
-            val list = this
         }.shuffled().forEachIndexed { index, pair ->
             buttons.get(index).run {
                 text = pair.first

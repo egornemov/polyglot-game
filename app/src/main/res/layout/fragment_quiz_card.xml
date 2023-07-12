@@ -1,39 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="8dp">
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_restart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_restart"
+        android:layout_margin="8dp"
+        android:src="@drawable/restart_alt_48px"
+        android:background="@color/white"/>
+
+    <TextView
+        android:id="@+id/tv_restart"
+        android:text="RESET GAME"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textColor="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="RESET GAME"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_restart"/>
 
     <TextView
         android:id="@+id/tv_card_description"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_play"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_restart"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        android:layout_margin="8dp"
         android:textSize="24sp"
         android:text="STEP 0"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        android:scaleType="fitXY"
         android:layout_gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="PLAY"/>
+        android:src="@drawable/sound_sampler_48px"
+        android:background="@color/white"/>
+
+    <TextView
+        android:id="@+id/tv_play"
+        app:layout_constraintStart_toStartOf="@+id/btn_play"
+        app:layout_constraintEnd_toEndOf="@+id/btn_play"
+        app:layout_constraintTop_toBottomOf="@+id/btn_play"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btn_choice_a"
@@ -43,6 +70,10 @@
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btn_choice_c"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_choice_b"
+        tools:visibility="visible"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="16dp"
         android:text="CHOICE A"/>
 
     <Button
@@ -53,6 +84,10 @@
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btn_choice_c"
         app:layout_constraintStart_toEndOf="@+id/btn_choice_a"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="16dp"
         android:text="CHOICE B"/>
 
     <Button
@@ -61,8 +96,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/btn_choice_e"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_choice_d"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="16dp"
         android:text="CHOICE C"/>
 
     <Button
@@ -72,7 +111,11 @@
         android:layout_gravity="center_vertical"
         app:layout_constraintBottom_toTopOf="@+id/btn_choice_e"
         app:layout_constraintStart_toEndOf="@+id/btn_choice_c"
+        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="16dp"
         android:text="CHOICE D"/>
 
 
@@ -83,7 +126,12 @@
         android:layout_gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_choice_f"
         android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="CHOICE E"/>
 
     <Button
@@ -93,7 +141,12 @@
         android:layout_gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_choice_e"
+        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="CHOICE F"/>
 
     <ProgressBar

@@ -14,20 +14,21 @@ android {
         minSdk = 19
         targetSdk = 33
         versionCode = 1
-        versionName = "0.1.0-${System.getenv()["VERSION_SHA"]}"
+        versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
         debug {
+            isMinifyEnabled = true
             applicationIdSuffix = ".debug"
         }
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -26,8 +27,8 @@ class ScoreCardFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_score_card, container, false)
 
         val tvScore = view.findViewById<TextView>(R.id.tv_score)
-        val btnRestart = view.findViewById<Button>(R.id.btn_restart)
-        val btnShareResults = view.findViewById<Button>(R.id.btn_share_results)
+        val btnRestart = view.findViewById<ImageButton>(R.id.btn_restart)
+        val btnShareResults = view.findViewById<ImageButton>(R.id.btn_share_results)
 
         val normalizedScore = fullScore.filter { target[it.key] == it.value }
         val langScore = normalizedScore.keys.size
