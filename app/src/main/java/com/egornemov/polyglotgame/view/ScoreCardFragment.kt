@@ -18,7 +18,7 @@ class ScoreCardFragment : Fragment() {
     lateinit var fullScore: Map<String, Int>
     var score = 0
     var total = 0
-    var solutionTimeMs = 0
+    var solutionTimeMs: Long = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +47,7 @@ class ScoreCardFragment : Fragment() {
 
         tvBackground.text = languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern
 
-        tvScore.text = "You score is $score of $total with $langScore languages is ${solutionTimeMs / 1000}  seconds\n" +
+        tvScore.text = "You score is ${solutionTimeMs / 1000L / 60L} minutes ${(solutionTimeMs - (solutionTimeMs / 1000L / 60L) * 60) / 1000L} seconds with detected $langScore languages.\n" +
                 "${if (langScore == 0) "Just start with $languageToLearn." else "You are ${if (isPolyglot)  "a NATURAL" else "NOT a"} polyglot"}"
 
         btnRestart.setOnClickListener {

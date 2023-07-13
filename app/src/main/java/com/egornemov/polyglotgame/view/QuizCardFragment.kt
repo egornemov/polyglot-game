@@ -20,6 +20,7 @@ import java.util.Timer
 import java.util.TimerTask
 
 class QuizCardFragment : Fragment() {
+    var solutionTimeMs: Long = 0L
     lateinit var target: Map<String, Int>
     lateinit var fullScore: Map<String, Int>
     lateinit var restOfTracks: List<Track>
@@ -30,6 +31,8 @@ class QuizCardFragment : Fragment() {
 
     private var mediaPlayer: MediaPlayer? = MediaPlayer()
     private var startPosition: Int = 0
+
+    private var startSolutionMs: Long = 0L
 
     companion object {
         const val DURATION_S = 20
@@ -87,11 +90,12 @@ class QuizCardFragment : Fragment() {
             startPosition = mp.duration / 8 + Random().nextInt(mp.duration / 2)
             mp.seekTo(startPosition)
 
+            startSolutionMs = System.currentTimeMillis()
             playTrack(btnPlay, tvPlay)
         }
 
         btnPlay.setOnClickListener {
-            if (!(mediaPlayer?.isPlaying ?: false)) {
+            if (mediaPlayer?.isPlaying != true) {
                 playTrack(btnPlay, tvPlay)
             }
         }
@@ -164,6 +168,7 @@ class QuizCardFragment : Fragment() {
                 setOnClickListener {
                     mediaPlayer?.release()
                     mediaPlayer = null
+                    val currenSolutionTimeMs = System.currentTimeMillis() - startSolutionMs
                     (activity?.application as PGApplication)
                         .serviceLocator
                         .mainCoordinator
@@ -173,7 +178,8 @@ class QuizCardFragment : Fragment() {
                                     val prevScore: Int = get(pair.first) ?: 0
                                     set(pair.first, prevScore + 1)
                                 }
-                            }, total)
+                            }, total,
+                            solutionTimeMs + currenSolutionTimeMs)
                 }
             }
         }
