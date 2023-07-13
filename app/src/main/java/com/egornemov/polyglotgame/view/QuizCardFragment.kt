@@ -64,9 +64,9 @@ class QuizCardFragment : Fragment() {
         val pbMediaplayerInit = view.findViewById<ProgressBar>(R.id.pb_mediaplayer_init)
 
         tvCardDescription.text = if (step == 1) {
-            "Listen track and choose the language. It's first of $total."
+            resources.getString(R.string.quiz_description_first, total)
         } else {
-            "It's $step of $total"
+            resources.getString(R.string.quiz_description_rest, step, total)
         }
 
         btnRestart.setOnClickListener {
@@ -171,7 +171,7 @@ class QuizCardFragment : Fragment() {
                             tvPlay.isVisible = false
                             count = 0
                         } else {
-                            tvPlay.text = "PLAYING ($count of $DURATION_S)"
+                            tvPlay.text = resources.getString(R.string.quiz_playback_status, count, DURATION_S)
                         }
                     }
                 }

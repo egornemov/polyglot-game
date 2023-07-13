@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_restart"
         app:layout_constraintEnd_toEndOf="@+id/tv_restart"
         android:layout_margin="8dp"
         android:src="@drawable/restart_alt_48px"
@@ -20,7 +21,7 @@
 
     <TextView
         android:id="@+id/tv_restart"
-        android:text="RESET GAME"
+        android:text="@string/tv_reset_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -38,7 +39,7 @@
         android:textAlignment="center"
         android:layout_margin="8dp"
         android:textSize="24sp"
-        android:text="STEP 0"/>
+        tools:text="STEP 0"/>
 
     <ImageButton
         android:id="@+id/btn_play"
@@ -81,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         tools:visibility="visible"
-        android:text="Waits too long?\nRefresh"
+        android:text="@string/tv_wait_refresh"
         android:textColor="@android:color/darker_gray"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/btn_refresh"
@@ -109,7 +110,7 @@
             android:textSize="24sp"
             android:padding="12dp"
             android:layout_marginHorizontal="8dp"
-            android:text="CHOICE A"/>
+            tools:text="CHOICE A"/>
 
         <Button
             android:id="@+id/btn_choice_b"
@@ -122,7 +123,7 @@
             android:padding="12dp"
             tools:visibility="visible"
             android:layout_marginHorizontal="8dp"
-            android:text="CHOICE B"/>
+            tools:text="CHOICE B"/>
 
     </LinearLayout>
 
@@ -148,7 +149,7 @@
             android:textSize="24sp"
             android:padding="12dp"
             android:layout_marginHorizontal="8dp"
-            android:text="CHOICE C"/>
+            tools:text="CHOICE C"/>
 
         <Button
             android:id="@+id/btn_choice_d"
@@ -161,7 +162,7 @@
             android:padding="12dp"
             tools:visibility="visible"
             android:layout_marginHorizontal="8dp"
-            android:text="CHOICE D"/>
+            tools:text="CHOICE D"/>
 
     </LinearLayout>
 
@@ -187,7 +188,7 @@
             android:padding="12dp"
             tools:visibility="visible"
             android:layout_marginHorizontal="8dp"
-            android:text="CHOICE E"/>
+            tools:text="CHOICE E"/>
 
         <Button
             android:id="@+id/btn_choice_f"
@@ -200,7 +201,7 @@
             android:padding="12dp"
             tools:visibility="visible"
             android:layout_marginHorizontal="8dp"
-            android:text="CHOICE F"/>
+            tools:text="CHOICE F"/>
 
     </LinearLayout>
 

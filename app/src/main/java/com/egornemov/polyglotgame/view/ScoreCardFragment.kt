@@ -50,10 +50,18 @@ class ScoreCardFragment : Fragment() {
         val isCheated = solutionTimeMs / 1000L > 3600 * 24
 
         tvScore.text = if (isCheated) {
-            "I'm sad that You've skipped some test.\nPlease, play with me again."
+            resources.getString(R.string.score_cheated)
         } else {
-            "You score is ${solutionTimeMs / 1000L / 60L} minutes ${(solutionTimeMs - (solutionTimeMs / 1000L / 60L) * 60) / 1000L} seconds with detected $langScore languages.\n" +
-                    "${if (langScore == 0) "Just start with $languageToLearn." else "You are ${if (isPolyglot)  "a NATURAL" else "NOT a"} polyglot"}"
+            val minutes = solutionTimeMs / 1000L / 60L
+            val seconds = (solutionTimeMs - (solutionTimeMs / 1000L / 60L) * 60) / 1000L
+            resources.getString(R.string.score_stats, minutes, seconds, langScore) +
+                    if (langScore == 0) {
+                        resources.getString(R.string.score_zero, languageToLearn)
+                    } else if (isPolyglot) {
+                        resources.getString(R.string.score_polyglot)
+                    } else {
+                        resources.getString(R.string.score_not_polyglot)
+                    }
         }
 
         btnRestart.setOnClickListener {
@@ -66,13 +74,13 @@ class ScoreCardFragment : Fragment() {
         }
         btnShareResults.setOnClickListener {
             val content = if (isCheated) {
-                "Brainy time killer, and I've failed to get win in it."
+                resources.getString(R.string.score_cheated_share)
             } else if (langScore == 0) {
-                "I will learn $languageToLearn this year! Do you know $languageToLearn?"
+                resources.getString(R.string.score_zero_share, languageToLearn, languageToLearn)
             } else if (isPolyglot) {
-                "I'm a NATURAL polyglot. I know ${langList.reduce { acc, s -> acc + ", " + s }}.\nBet that you're not?"
+                resources.getString(R.string.score_polyglot_share, langList.reduce { acc, s -> "$acc, $s" })
             } else {
-                "I'm NOT a polyglot.\nBet that you are NOT a polyglot too?"
+                resources.getString(R.string.score_not_polyglot_share)
             }
             shareContent(content)
         }
@@ -82,13 +90,15 @@ class ScoreCardFragment : Fragment() {
 
     private fun shareContent(content: String) {
         val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "text/plain"
+        intent.type = SHARE_INTENT_TYPE
         intent.putExtra(Intent.EXTRA_TEXT, content)
-        startActivity(Intent.createChooser(intent, "Share via"))
+        startActivity(Intent.createChooser(intent, SHARE_DIALOG_TITLE))
     }
 
     companion object {
         const val POLYGLOT_THRESHOLD = 4
+        const val SHARE_INTENT_TYPE = "text/plain"
+        const val SHARE_DIALOG_TITLE = "Share via"
     }
 
 }

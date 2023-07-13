@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Polyglot Game</string>
+    <string name="tv_reset_game">RESET GAME</string>
+    <string name="tv_play_again">PLAY AGAIN</string>
+    <string name="tv_wait_refresh">Waits too long?\nRefresh.</string>
+    <string name="tv_share_with_friends">SHARE WITH FRIENDS</string>
+    <string name="quiz_description_first">Listen track and choose the language. This is first of %d.</string>
+    <string name="quiz_description_rest">This is %d of %d.</string>
+    <string name="quiz_playback_status">PLAYING (%d of %d).</string>
+    <string name="score_cheated">I\'m sad that You\'ve skipped some test.\nPlease, play with me again.</string>
+    <string name="score_cheated_share">Brainy time killer, and I\'ve failed to get win in it.</string>
+    <string name="score_zero_share">I will learn %s this year! Do you know %s?</string>
+    <string name="score_polyglot_share">I\'m a NATURAL polyglot. I know %s.\nBet that you're not?</string>
+    <string name="score_not_polyglot_share">I\'m NOT a polyglot.\nBet that you are NOT a polyglot too?</string>
+    <string name="score_stats">You score is %d minutes %d seconds with detected %d languages.\n</string>
+    <string name="score_zero">Just start with %s.</string>
+    <string name="score_polyglot">You are a NATURAL polyglot.</string>
+    <string name="score_not_polyglot">You are NOT a polyglot.</string>
 </resources>

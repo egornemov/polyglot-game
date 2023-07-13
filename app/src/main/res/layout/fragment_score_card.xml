@@ -35,13 +35,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="16dp"
-            android:text="YOUR SCORE"/>
+            tools:text="YOUR SCORE"/>
 
         <ImageButton
             android:id="@+id/btn_restart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_restart"
             app:layout_constraintEnd_toEndOf="@+id/tv_restart"
             android:layout_margin="8dp"
             android:background="@android:color/transparent"
@@ -49,7 +50,7 @@
 
         <TextView
             android:id="@+id/tv_restart"
-            android:text="PLAY AGAIN"
+            android:text="@string/tv_play_again"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/darker_gray"
@@ -76,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:textColor="@android:color/darker_gray"
-            android:text="SHARE WITH FRIENDS"/>
+            android:text="@string/tv_share_with_friends"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
