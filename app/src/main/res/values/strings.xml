@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Polyglot Game</string>
+    <string name="tv_created_by">created by Yehor NEMOV</string>
     <string name="tv_reset_game">RESET GAME</string>
     <string name="tv_play_again">PLAY AGAIN</string>
     <string name="tv_wait_refresh">Waits too long?\nRefresh.</string>
@@ -10,7 +11,7 @@
     <string name="score_cheated">I\'m sad that You\'ve skipped some test.\nPlease, play with me again.</string>
     <string name="score_cheated_share">Brainy time killer, and I\'ve failed to get win in it.</string>
     <string name="score_zero_share">I will learn %s this year! Do you know %s?</string>
-    <string name="score_polyglot_share">I\'m a NATURAL polyglot. I know %s.\nBet that you're not?</string>
+    <string name="score_polyglot_share">I\'m a NATURAL polyglot. I know %s.\nBet that you aren\'t?</string>
     <string name="score_not_polyglot_share">I\'m NOT a polyglot.\nBet that you are NOT a polyglot too?</string>
     <string name="score_stats">You score is %d minutes %d seconds with detected %d languages.\n</string>
     <string name="score_zero">Just start with %s.</string>

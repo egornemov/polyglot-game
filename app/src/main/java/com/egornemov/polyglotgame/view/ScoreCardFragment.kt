@@ -78,7 +78,8 @@ class ScoreCardFragment : Fragment() {
             } else if (langScore == 0) {
                 resources.getString(R.string.score_zero_share, languageToLearn, languageToLearn)
             } else if (isPolyglot) {
-                resources.getString(R.string.score_polyglot_share, langList.reduce { acc, s -> "$acc, $s" })
+                val languages: String = langList.reduce { acc, s -> "$acc, $s" }
+                resources.getString(R.string.score_polyglot_share, languages)
             } else {
                 resources.getString(R.string.score_not_polyglot_share)
             }
