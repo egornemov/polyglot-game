@@ -18,6 +18,7 @@ class ScoreCardFragment : Fragment() {
     lateinit var fullScore: Map<String, Int>
     var score = 0
     var total = 0
+    var solutionTimeMs = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +27,7 @@ class ScoreCardFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_score_card, container, false)
 
+        val tvBackground = view.findViewById<TextView>(R.id.tv_background)
         val tvScore = view.findViewById<TextView>(R.id.tv_score)
         val btnRestart = view.findViewById<ImageButton>(R.id.btn_restart)
         val btnShareResults = view.findViewById<ImageButton>(R.id.btn_share_results)
@@ -37,7 +39,15 @@ class ScoreCardFragment : Fragment() {
 
         val languageToLearn: String = target.keys.shuffled().first()
 
-        tvScore.text = "You score is $score of $total with $langScore languages detected ($langList)\n" +
+        val languagePattern: String = if (langScore == 0) {
+            target.keys.reduce { acc, s -> acc + " " + s + "?" }
+        } else {
+            langList.reduce { acc, s -> acc + " " + s }
+        }
+
+        tvBackground.text = languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern
+
+        tvScore.text = "You score is $score of $total with $langScore languages is ${solutionTimeMs / 1000}  seconds\n" +
                 "${if (langScore == 0) "Just start with $languageToLearn." else "You are ${if (isPolyglot)  "a NATURAL" else "NOT a"} polyglot"}"
 
         btnRestart.setOnClickListener {

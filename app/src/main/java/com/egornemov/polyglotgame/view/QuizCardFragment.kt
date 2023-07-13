@@ -86,51 +86,13 @@ class QuizCardFragment : Fragment() {
 
             startPosition = mp.duration / 8 + Random().nextInt(mp.duration / 2)
             mp.seekTo(startPosition)
+
+            playTrack(btnPlay, tvPlay)
         }
 
         btnPlay.setOnClickListener {
-            btnPlay.isEnabled = false
-            btnPlay.isClickable = false
-            tvPlay.isVisible = true
-
-            mediaPlayer?.start()
-
-            val mainLooper = activity?.mainLooper
-            mainLooper?.run {
-                val handler = Handler(this)
-                val positionUpdater = Timer()
-                val positionUpdate = object : TimerTask() {
-
-                    var count = 0
-
-                    override fun run() {
-                        count++
-                        handler.post {
-                            if (count > DURATION_S) {
-                                positionUpdater.purge()
-                                tvPlay.text = ""
-                                tvPlay.isVisible = false
-                                count = 0
-                            } else {
-                                tvPlay.text = "PLAYING ($count of $DURATION_S)"
-                            }
-                        }
-                    }
-                }
-                positionUpdater.scheduleAtFixedRate(positionUpdate, 1000, 1000)
-
-
-
-                // Stop playback after the desired duration
-                handler.postDelayed({
-                    if (mediaPlayer != null) {
-                        mediaPlayer?.pause()
-                        mediaPlayer?.seekTo(startPosition) // Reset position for future playback
-
-                        btnPlay.isEnabled = true
-                        btnPlay.isClickable = true
-                    }
-                }, DURATION_MS.toLong())
+            if (!(mediaPlayer?.isPlaying ?: false)) {
+                playTrack(btnPlay, tvPlay)
             }
         }
 
@@ -139,6 +101,51 @@ class QuizCardFragment : Fragment() {
             ), targetTrack)
 
         return view
+    }
+
+    private fun playTrack(btnPlay: ImageButton, tvPlay: TextView) {
+        btnPlay.isEnabled = false
+        btnPlay.isClickable = false
+        tvPlay.isVisible = true
+        mediaPlayer?.start()
+
+        val mainLooper = activity?.mainLooper
+        mainLooper?.run {
+            val handler = Handler(this)
+            val positionUpdater = Timer()
+            val positionUpdate = object : TimerTask() {
+
+                var count = 0
+
+                override fun run() {
+                    count++
+                    handler.post {
+                        if (count > DURATION_S) {
+                            positionUpdater.purge()
+                            tvPlay.text = ""
+                            tvPlay.isVisible = false
+                            count = 0
+                        } else {
+                            tvPlay.text = "PLAYING ($count of $DURATION_S)"
+                        }
+                    }
+                }
+            }
+            positionUpdater.scheduleAtFixedRate(positionUpdate, 1000, 1000)
+
+
+
+            // Stop playback after the desired duration
+            handler.postDelayed({
+                if (mediaPlayer != null) {
+                    mediaPlayer?.pause()
+                    mediaPlayer?.seekTo(startPosition) // Reset position for future playback
+
+                    btnPlay.isEnabled = true
+                    btnPlay.isClickable = true
+                }
+            }, DURATION_MS.toLong())
+        }
     }
 
     private fun initChoices(buttons: List<Button>, targetTrack: Track) {
