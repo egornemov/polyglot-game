@@ -62,92 +62,122 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btn_choice_a"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_buttons_ab"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_choice_c"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/ll_buttons_cd"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_choice_b"
-        tools:visibility="visible"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="16dp"
-        android:text="CHOICE A"/>
+        app:layout_constraintEnd_toEndOf="parent" >
 
-    <Button
-        android:id="@+id/btn_choice_b"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_choice_c"
-        app:layout_constraintStart_toEndOf="@+id/btn_choice_a"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="visible"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="16dp"
-        android:text="CHOICE B"/>
+        <Button
+            android:id="@+id/btn_choice_a"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:textSize="24sp"
+            android:padding="12dp"
+            android:layout_marginHorizontal="8dp"
+            android:text="CHOICE A"/>
 
-    <Button
-        android:id="@+id/btn_choice_c"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_choice_b"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            android:textSize="24sp"
+            android:padding="12dp"
+            tools:visibility="visible"
+            android:layout_marginHorizontal="8dp"
+            android:text="CHOICE B"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_buttons_cd"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:visibility="gone"
-        tools:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btn_choice_e"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/ll_buttons_ef"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_choice_d"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="16dp"
-        android:text="CHOICE C"/>
+        app:layout_constraintEnd_toEndOf="parent" >
 
-    <Button
-        android:id="@+id/btn_choice_d"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_choice_c"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:textSize="24sp"
+            android:padding="12dp"
+            android:layout_marginHorizontal="8dp"
+            android:text="CHOICE C"/>
+
+        <Button
+            android:id="@+id/btn_choice_d"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            android:textSize="24sp"
+            android:padding="12dp"
+            tools:visibility="visible"
+            android:layout_marginHorizontal="8dp"
+            android:text="CHOICE D"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_buttons_ef"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btn_choice_e"
-        app:layout_constraintStart_toEndOf="@+id/btn_choice_c"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="16dp"
-        android:text="CHOICE D"/>
-
-
-    <Button
-        android:id="@+id/btn_choice_e"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_choice_f"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="CHOICE E"/>
+        app:layout_constraintEnd_toEndOf="parent" >
 
-    <Button
-        android:id="@+id/btn_choice_f"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_choice_e"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="CHOICE F"/>
+        <Button
+            android:id="@+id/btn_choice_e"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            android:textSize="24sp"
+            android:padding="12dp"
+            tools:visibility="visible"
+            android:layout_marginHorizontal="8dp"
+            android:text="CHOICE E"/>
+
+        <Button
+            android:id="@+id/btn_choice_f"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            android:textSize="24sp"
+            android:padding="12dp"
+            tools:visibility="visible"
+            android:layout_marginHorizontal="8dp"
+            android:text="CHOICE F"/>
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/pb_mediaplayer_init"

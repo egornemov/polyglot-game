@@ -2,5 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="holo_orange_light_4f">#4fffbb33</color>
+    <color name="holo_orange_light_1f">#1fffbb33</color>
+    <color name="splash_background">#0056B9</color>
 </resources>

@@ -6,19 +6,19 @@
     android:layout_height="match_parent">
 
     <TextView
-        tools:text="ANDROID"
+        tools:text="ANDROID ANDROID"
         app:layout_constraintCircleAngle="45"
         android:id="@+id/tv_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/holo_orange_light_4f"
-        android:scaleX="1.2"
-        android:scaleY="1.2"
+        android:textColor="@color/holo_orange_light_1f"
+        android:textStyle="bold"
+        android:lineSpacingMultiplier="0.7"
+        android:scaleX="1.35"
+        android:scaleY="1.35"
         android:textSize="96sp"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"

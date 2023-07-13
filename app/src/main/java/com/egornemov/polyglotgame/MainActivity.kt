@@ -1,10 +1,10 @@
 package com.egornemov.polyglotgame
 
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.egornemov.polyglotgame.domain.Track
-import kotlin.random.Random
+import android.os.Handler
+import android.widget.FrameLayout
+import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,24 +12,20 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        (application as PGApplication)
-            .serviceLocator
-            .mediaPlayer = MediaPlayer()
-
-        (application as PGApplication)
-            .serviceLocator
-            .mainCoordinator
-            .quizCard(
-                this,
+        Handler(mainLooper).postDelayed(
+            {
+                val container = findViewById<FrameLayout>(R.id.fragment_container)
+                container.isVisible = true
                 (application as PGApplication)
-                    .serviceLocator.data
-            )
-    }
-
-    override fun onDestroy() {
-        (application as PGApplication)
-            .serviceLocator
-            .mediaPlayer.release()
-        super.onDestroy()
+                    .serviceLocator
+                    .mainCoordinator
+                    .quizCard(
+                        this,
+                        (application as PGApplication)
+                            .serviceLocator.data
+                    )
+            },
+            1600L
+        )
     }
 }
