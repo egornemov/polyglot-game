@@ -12,7 +12,7 @@ class ServiceLocator {
     lateinit var mediaPlayer: MediaPlayer
 
     private val languages = Data.languageMap.keys.toList()
-    private val flattenedList = Data.languageMap.flatMap { entry ->
+    val flattenedList = Data.languageMap.flatMap { entry ->
         entry.value.map { value -> entry.key to value }
     }
 

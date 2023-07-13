@@ -49,6 +49,10 @@ class QuizCardFragment : Fragment() {
         val btnRestart = view.findViewById<ImageButton>(R.id.btn_restart)
         val btnPlay = view.findViewById<ImageButton>(R.id.btn_play)
         val tvPlay = view.findViewById<TextView>(R.id.tv_play)
+
+        val btnRefresh = view.findViewById<ImageButton>(R.id.btn_refresh)
+        val tvRefresh = view.findViewById<TextView>(R.id.tv_refresh)
+
         val btnChoiceA = view.findViewById<Button>(R.id.btn_choice_a)
         val btnChoiceB = view.findViewById<Button>(R.id.btn_choice_b)
         val btnChoiceC = view.findViewById<Button>(R.id.btn_choice_c)
@@ -65,8 +69,6 @@ class QuizCardFragment : Fragment() {
             "It's $step of $total"
         }
 
-        mediaPlayer?.setDataSource(targetTrack.url)
-
         btnRestart.setOnClickListener {
             activity?.run {
                 (application as PGApplication).serviceLocator.mainCoordinator
@@ -76,11 +78,38 @@ class QuizCardFragment : Fragment() {
             }
         }
 
+        btnRefresh.setOnClickListener {
+            mediaPlayer?.reset()
+            targetTrack = targetTrack.copy(
+                url = (activity?.application as PGApplication).serviceLocator.flattenedList.filter {
+                    it.first == targetTrack.answer && it.second != targetTrack.url
+                }.shuffled().first().second
+            )
+            prepareMediaPlayer(pbMediaplayerInit, btnPlay, tvPlay, btnRefresh, tvRefresh)
+        }
+
         pbMediaplayerInit.isVisible = true
         btnPlay.isEnabled = false
         btnPlay.isClickable = false
+        btnRefresh.isVisible = true
+        tvRefresh.isVisible = true
 
-        mediaPlayer?.prepareAsync()
+        prepareMediaPlayer(pbMediaplayerInit, btnPlay, tvPlay, btnRefresh, tvRefresh)
+
+        btnPlay.setOnClickListener {
+            playTrack(btnPlay, tvPlay)
+        }
+
+        initChoices(listOf(btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD,
+//            btnChoiceE, btnChoiceF,
+            ), targetTrack)
+
+        return view
+    }
+
+    private fun prepareMediaPlayer(pbMediaplayerInit: ProgressBar, btnPlay: ImageButton, tvPlay: TextView, btnRefresh: ImageButton, tvRefresh: TextView) {
+
+        mediaPlayer?.setDataSource(targetTrack.url)
         mediaPlayer?.setOnPreparedListener { mp ->
 
             pbMediaplayerInit.isVisible = false
@@ -91,20 +120,31 @@ class QuizCardFragment : Fragment() {
             mp.seekTo(startPosition)
 
             startSolutionMs = System.currentTimeMillis()
+
+            btnRefresh.isVisible = false
+            tvRefresh.isVisible = false
+
             playTrack(btnPlay, tvPlay)
         }
+        mediaPlayer?.prepareAsync()
+    }
 
-        btnPlay.setOnClickListener {
-            if (mediaPlayer?.isPlaying != true) {
-                playTrack(btnPlay, tvPlay)
-            }
+    private var isResumable = false
+
+    override fun onResume() {
+        super.onResume()
+        if (isResumable) {
+            mediaPlayer?.start()
         }
+    }
 
-        initChoices(listOf(btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD,
-//            btnChoiceE, btnChoiceF,
-            ), targetTrack)
-
-        return view
+    override fun onPause() {
+        if (mediaPlayer?.isPlaying == true) {
+            mediaPlayer?.pause()
+        } else {
+            isResumable = false
+        }
+        super.onPause()
     }
 
     private fun playTrack(btnPlay: ImageButton, tvPlay: TextView) {
@@ -112,6 +152,7 @@ class QuizCardFragment : Fragment() {
         btnPlay.isClickable = false
         tvPlay.isVisible = true
         mediaPlayer?.start()
+        isResumable = true
 
         val mainLooper = activity?.mainLooper
         mainLooper?.run {
@@ -125,7 +166,7 @@ class QuizCardFragment : Fragment() {
                     count++
                     handler.post {
                         if (count > DURATION_S) {
-                            positionUpdater.purge()
+                            positionUpdater.cancel()
                             tvPlay.text = ""
                             tvPlay.isVisible = false
                             count = 0
