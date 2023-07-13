@@ -47,8 +47,14 @@ class ScoreCardFragment : Fragment() {
 
         tvBackground.text = languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern + languagePattern
 
-        tvScore.text = "You score is ${solutionTimeMs / 1000L / 60L} minutes ${(solutionTimeMs - (solutionTimeMs / 1000L / 60L) * 60) / 1000L} seconds with detected $langScore languages.\n" +
-                "${if (langScore == 0) "Just start with $languageToLearn." else "You are ${if (isPolyglot)  "a NATURAL" else "NOT a"} polyglot"}"
+        val isCheated = solutionTimeMs / 1000L > 3600 * 24
+
+        tvScore.text = if (isCheated) {
+            "I'm sad that You've skipped some test.\nPlease, play with me again."
+        } else {
+            "You score is ${solutionTimeMs / 1000L / 60L} minutes ${(solutionTimeMs - (solutionTimeMs / 1000L / 60L) * 60) / 1000L} seconds with detected $langScore languages.\n" +
+                    "${if (langScore == 0) "Just start with $languageToLearn." else "You are ${if (isPolyglot)  "a NATURAL" else "NOT a"} polyglot"}"
+        }
 
         btnRestart.setOnClickListener {
             activity?.run {
@@ -59,7 +65,9 @@ class ScoreCardFragment : Fragment() {
             }
         }
         btnShareResults.setOnClickListener {
-            val content = if (langScore == 0) {
+            val content = if (isCheated) {
+                "Brainy time killer, and I've failed to get win in it."
+            } else if (langScore == 0) {
                 "I will learn $languageToLearn this year! Do you know $languageToLearn?"
             } else if (isPolyglot) {
                 "I'm a NATURAL polyglot. I know ${langList.reduce { acc, s -> acc + ", " + s }}.\nBet that you're not?"

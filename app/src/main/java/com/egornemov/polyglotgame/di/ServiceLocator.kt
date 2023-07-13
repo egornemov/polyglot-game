@@ -24,9 +24,9 @@ class ServiceLocator {
                 } else {
                     it
                 }
-            }.run {
+            }.shuffled().subList(0, 6).toList().run {
                 this + this
-            }.shuffled().subList(0, 6)
+            }
 
             val noiseLanguages = Data.languageMap.keys.let {
                 if (it.size < 6) {
