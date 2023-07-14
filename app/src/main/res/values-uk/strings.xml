@@ -15,4 +15,14 @@
     <string name="score_zero">Просто почніть з %s.</string>
     <string name="score_polyglot">Ви є ПРИРОДНИМ поліглотом.</string>
     <string name="score_not_polyglot">Ви НЕ поліглот.</string>
+    <string name="undefined">Не визначено</string>
+    <!-- languages -->
+    <string name="catalan">Каталанська</string>
+    <string name="english">Англійська</string>
+    <string name="french">Французька</string>
+    <string name="german">Німецька</string>
+    <string name="greek">Грецька</string>
+    <string name="italian">Італійська</string>
+    <string name="spanish">Іспанська</string>
+    <string name="turkish">Турецька</string>
 </resources>

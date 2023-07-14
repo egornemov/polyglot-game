@@ -17,4 +17,14 @@
     <string name="score_zero">Just start with %s.</string>
     <string name="score_polyglot">You are a NATURAL polyglot.</string>
     <string name="score_not_polyglot">You are NOT a polyglot.</string>
+    <string name="undefined">Undefined</string>
+    <!-- languages -->
+    <string name="catalan">Catalan</string>
+    <string name="english">English</string>
+    <string name="french">French</string>
+    <string name="german">German</string>
+    <string name="greek">Greek</string>
+    <string name="italian">Italian</string>
+    <string name="spanish">Spanish</string>
+    <string name="turkish">Turkish</string>
 </resources>

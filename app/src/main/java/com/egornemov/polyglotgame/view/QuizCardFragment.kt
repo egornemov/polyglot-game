@@ -1,5 +1,6 @@
 package com.egornemov.polyglotgame.view
 
+import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -18,6 +19,7 @@ import com.egornemov.polyglotgame.domain.Track
 import java.util.Random
 import java.util.Timer
 import java.util.TimerTask
+
 
 class QuizCardFragment : Fragment() {
     var solutionTimeMs: Long = 0L
@@ -100,9 +102,10 @@ class QuizCardFragment : Fragment() {
             playTrack(btnPlay, tvPlay)
         }
 
-        initChoices(listOf(btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD,
+        initChoices(listOf(
+            btnChoiceA, btnChoiceB, btnChoiceC, btnChoiceD,
 //            btnChoiceE, btnChoiceF,
-            ), targetTrack)
+        ), targetTrack)
 
         return view
     }
@@ -200,6 +203,22 @@ class QuizCardFragment : Fragment() {
         }
     }
 
+    private fun getStringByResName(context: Context, resName: String): String {
+        val resources = resources
+        val resourceName = resName.toLowerCase() // Name of the string resource you want to access
+
+        val packageName: String = context.packageName
+
+        val resourceId = resources.getIdentifier(resourceName, "string", packageName)
+        return if (resourceId != 0) {
+            resources.getString(resourceId)
+            // Use the string value as needed
+        } else {
+            resources.getString(R.string.undefined)
+            // Resource not found
+        }
+    }
+
     private fun initChoices(buttons: List<Button>, targetTrack: Track) {
         buttons.forEach {
             it.isVisible = true
@@ -212,7 +231,7 @@ class QuizCardFragment : Fragment() {
             }
         }.shuffled().forEachIndexed { index, pair ->
             buttons.get(index).run {
-                text = pair.first
+                text = getStringByResName(context, pair.first)
                 setOnClickListener {
                     mediaPlayer?.release()
                     mediaPlayer = null
