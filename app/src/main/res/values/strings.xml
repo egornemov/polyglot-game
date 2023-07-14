@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Polyglot Game</string>
-    <string name="tv_created_by">created by Yehor NEMOV</string>
+    <string name="app_name" translatable="false">Polyglot Game</string>
+    <string name="tv_created_by" translatable="false">created by Yehor NEMOV</string>
     <string name="tv_reset_game">RESET GAME</string>
     <string name="tv_play_again">PLAY AGAIN</string>
     <string name="tv_wait_refresh">Waits too long?\nRefresh.</string>

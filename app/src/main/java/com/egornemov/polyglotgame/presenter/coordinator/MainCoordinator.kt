@@ -20,14 +20,14 @@ class MainCoordinator {
     fun quizCard(activity: FragmentActivity, tracks: List<Track>) {
         fragmentManager = activity.supportFragmentManager
         val target = calculateTarget(tracks)
-        navigateToQuizCard(tracks, target, 1, 0, emptyMap(), tracks.size, 0, true)
+        navigateToQuizCard(tracks, target, 1, 0, emptyMap(), tracks.size, 0)
     }
 
     fun nextStep(tracks: List<Track>, target: Map<String, Int>, step: Int, score: Int, fullScore: Map<String, Int>, total: Int, solutionTimeMs: Long) {
         navigateToQuizCard(tracks, target, step, score, fullScore, total, solutionTimeMs)
     }
 
-    private fun navigateToQuizCard(tracks: List<Track>, target: Map<String, Int>, step: Int, score: Int, fullScore: Map<String, Int>, total: Int, solutionTimeMs: Long, isFirst: Boolean = false) {
+    private fun navigateToQuizCard(tracks: List<Track>, target: Map<String, Int>, step: Int, score: Int, fullScore: Map<String, Int>, total: Int, solutionTimeMs: Long) {
         if (tracks.isEmpty()) {
             val scoreCard = ScoreCardFragment()
             scoreCard.target = target
@@ -47,11 +47,7 @@ class MainCoordinator {
             quizCard.total = total
             quizCard.solutionTimeMs = solutionTimeMs
 
-            if (isFirst) {
-                addFragment(quizCard)
-            } else {
-                replaceFragment(quizCard)
-            }
+            replaceFragment(quizCard)
         }
     }
 
@@ -71,7 +67,7 @@ class MainCoordinator {
 
     fun restart(tracks: List<Track>) {
         val target = calculateTarget(tracks)
-        navigateToQuizCard(tracks, target, 1, 0, emptyMap(), tracks.size, 0, false)
+        navigateToQuizCard(tracks, target, 1, 0, emptyMap(), tracks.size, 0)
     }
 
     private fun calculateTarget(tracks: List<Track>): Map<String, Int> {
