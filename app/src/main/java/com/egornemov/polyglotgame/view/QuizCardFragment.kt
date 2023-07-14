@@ -171,7 +171,9 @@ class QuizCardFragment : Fragment() {
                             tvPlay.isVisible = false
                             count = 0
                         } else {
-                            tvPlay.text = resources.getString(R.string.quiz_playback_status, count, DURATION_S)
+                            tvPlay.run {
+                                text = context.resources.getString(R.string.quiz_playback_status, count, DURATION_S)
+                            }
                         }
                     }
                 }
