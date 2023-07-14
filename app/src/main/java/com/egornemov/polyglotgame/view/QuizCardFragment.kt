@@ -119,8 +119,6 @@ class QuizCardFragment : Fragment() {
             startPosition = mp.duration / 8 + Random().nextInt(mp.duration / 2)
             mp.seekTo(startPosition)
 
-            startSolutionMs = System.currentTimeMillis()
-
             btnRefresh.isVisible = false
             tvRefresh.isVisible = false
 
@@ -130,15 +128,18 @@ class QuizCardFragment : Fragment() {
     }
 
     private var isResumable = false
+    private var isPausedFragment = false
 
     override fun onResume() {
         super.onResume()
+        isPausedFragment = false
         if (isResumable) {
             mediaPlayer?.start()
         }
     }
 
     override fun onPause() {
+        isPausedFragment = true
         if (mediaPlayer?.isPlaying == true) {
             mediaPlayer?.pause()
         } else {
@@ -148,11 +149,15 @@ class QuizCardFragment : Fragment() {
     }
 
     private fun playTrack(btnPlay: ImageButton, tvPlay: TextView) {
+        isResumable = true
+        if (isPausedFragment) {
+            return
+        }
         btnPlay.isEnabled = false
         btnPlay.isClickable = false
         tvPlay.isVisible = true
+        startSolutionMs = System.currentTimeMillis()
         mediaPlayer?.start()
-        isResumable = true
 
         val mainLooper = activity?.mainLooper
         mainLooper?.run {
