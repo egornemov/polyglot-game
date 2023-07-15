@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name" translatable="false">Polyglot-Spiel</string>
+    <string name="tv_created_by" translatable="false">erstellt von Yehor NEMOV</string>
+    <string name="tv_reset_game">SPIEL ZURÜCKSETZEN</string>
+    <string name="tv_play_again">ERNEUT SPIELEN</string>
+    <string name="tv_wait_refresh">Dauert es zu lange?\nAktualisieren.</string>
+    <string name="tv_share_with_friends">MIT FREUNDEN TEILEN</string>
+    <string name="quiz_description_first">Hören Sie den Track und wählen Sie die Sprache. Dies ist das erste von %d.</string>
+    <string name="quiz_description_rest">Dies ist %d von %d.</string>
+    <string name="quiz_playback_status">WIRD ABGESPIELT (%d von %d).</string>
+    <string name="score_cheated">Es macht mich traurig, dass Sie einige Tests übersprungen haben.\nBitte spielen Sie noch einmal mit mir.</string>
+    <string name="score_cheated_share">Intelligenter Zeitvertreib, und ich habe es nicht geschafft zu gewinnen.</string>
+    <string name="score_zero_share">Ich werde %s dieses Jahr lernen! Kennst du %s?</string>
+    <string name="score_polyglot_share">Ich bin ein NATÜRLICHER Polyglot. Ich kenne %s.\nWetten, dass du es nicht tust?</string>
+    <string name="score_not_polyglot_share">Ich bin KEIN Polyglot.\nWetten, dass du auch keiner bist?</string>
+    <string name="score_stats">Ihr Score beträgt %d Minuten %d Sekunden mit erkannten %d Sprachen.\n</string>
+    <string name="score_zero">Fangen Sie einfach mit %s an.</string>
+    <string name="score_polyglot">Sie sind ein NATÜRLICHER Polyglot.</string>
+    <string name="score_not_polyglot">Sie sind KEIN Polyglot.</string>
+    <string name="undefined">Undefiniert</string>
+    <string name="tv_easy_description">8 Sprachen (Katalanisch, Englisch, Französisch, Deutsch, Griechisch, Italienisch, Spanisch, Türkisch)</string>
+    <string name="tv_europe_description">Sprachen Europas</string>
+    <!-- languages -->
+    <string name="albanian">Albanisch</string>
+    <string name="azerbaijani">Aserbaidschanisch</string>
+    <string name="belarusian">Belarussisch</string>
+    <string name="bosnian">Bosnisch</string>
+    <string name="bulgarian">Bulgarisch</string>
+    <string name="catalan">Katalanisch</string>
+    <string name="croatian">Kroatisch</string>
+    <string name="czech">Tschechisch</string>
+    <string name="danish">Dänisch</string>
+    <string name="dutch">Niederländisch</string>
+    <string name="english">Englisch</string>
+    <string name="estonian">Estnisch</string>
+    <string name="finnish">Finnisch</string>
+    <string name="french">Französisch</string>
+    <string name="georgian">Georgisch</string>
+    <string name="german">Deutsch</string>
+    <string name="greek">Griechisch</string>
+    <string name="hungarian">Ungarisch</string>
+    <string name="icelandic">Isländisch</string>
+    <string name="irish">Irisch</string>
+    <string name="italian">Italienisch</string>
+    <string name="kazakh">Kasachisch</string>
+    <string name="latvian">Lettisch</string>
+    <string name="lithuanian">Litauisch</string>
+    <string name="luxembourgish">Luxemburgisch</string>
+    <string name="macedonian">Mazedonisch</string>
+    <string name="maltese">Maltesisch</string>
+    <string name="moldovan">Moldauisch</string>
+    <string name="montenegrin">Montenegrinisch</string>
+    <string name="norwegian">Norwegisch</string>
+    <string name="polish">Polnisch</string>
+    <string name="portuguese">Portugiesisch</string>
+    <string name="romanian">Rumänisch</string>
+    <string name="russian">Russisch</string>
+    <string name="serbian">Serbisch</string>
+    <string name="slovak">Slowakisch</string>
+    <string name="slovenian">Slowenisch</string>
+    <string name="spanish">Spanisch</string>
+    <string name="swedish">Schwedisch</string>
+    <string name="turkish">Türkisch</string>
+    <string name="ukrainian">Ukrainisch</string>
+</resources>

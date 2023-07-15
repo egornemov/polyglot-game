@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN
 import com.egornemov.polyglotgame.MainActivity
 import com.egornemov.polyglotgame.R
 import com.egornemov.polyglotgame.domain.Track
+import com.egornemov.polyglotgame.view.GameModeFragment
 import com.egornemov.polyglotgame.view.QuizCardFragment
 import com.egornemov.polyglotgame.view.ScoreCardFragment
 
@@ -17,8 +18,18 @@ class MainCoordinator {
     private val containerId = R.id.fragment_container
 
     private lateinit var fragmentManager: FragmentManager
-    fun quizCard(activity: FragmentActivity, tracks: List<Track>) {
+
+    fun gameMode(activity: FragmentActivity) {
         fragmentManager = activity.supportFragmentManager
+        navigateToGameMode()
+    }
+
+    private fun navigateToGameMode() {
+        val gameMode = GameModeFragment()
+        replaceFragment(gameMode)
+    }
+
+    fun quizCard(tracks: List<Track>) {
         val target = calculateTarget(tracks)
         navigateToQuizCard(tracks, target, 1, 0, emptyMap(), tracks.size, 0)
     }

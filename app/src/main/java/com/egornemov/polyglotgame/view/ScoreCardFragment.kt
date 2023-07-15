@@ -67,9 +67,7 @@ class ScoreCardFragment : Fragment() {
         btnRestart.setOnClickListener {
             activity?.run {
                 (application as PGApplication).serviceLocator.mainCoordinator
-                    .restart(
-                        (application as PGApplication).serviceLocator.data
-                    )
+                    .gameMode(this)
             }
         }
         btnShareResults.setOnClickListener {

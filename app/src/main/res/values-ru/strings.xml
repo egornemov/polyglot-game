@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">Игра Полиглот</string>
-    <string name="tv_created_by" translatable="false">создано Yehor NEMOV</string>
     <string name="tv_reset_game">СБРОСИТЬ ИГРУ</string>
     <string name="tv_play_again">ИГРАТЬ СНОВА</string>
     <string name="tv_wait_refresh">Долго ждете?\nОбновить.</string>
@@ -18,13 +16,48 @@
     <string name="score_polyglot">Вы НАТУРАЛЬНЫЙ полиглот.</string>
     <string name="score_not_polyglot">Вы НЕ полиглот.</string>
     <string name="undefined">Неопределено</string>
+    <string name="tv_easy_description">8 языков (каталонский, английский, французский, немецкий, греческий, итальянский, испанский, турецкий)</string>
+    <string name="tv_europe_description">Языки Европы</string>
     <!-- languages -->
-    <string name="catalan">Каталанский</string>
-    <string name="english">Английский</string>
-    <string name="french">Французский</string>
-    <string name="german">Немецкий</string>
-    <string name="greek">Греческий</string>
-    <string name="italian">Итальянский</string>
-    <string name="spanish">Испанский</string>
-    <string name="turkish">Турецкий</string>
+    <string name="albanian">албанский</string>
+    <string name="azerbaijani">азербайджанский</string>
+    <string name="belarusian">белорусский</string>
+    <string name="bosnian">боснийский</string>
+    <string name="bulgarian">болгарский</string>
+    <string name="catalan">каталанский</string>
+    <string name="croatian">хорватский</string>
+    <string name="czech">чешский</string>
+    <string name="danish">датский</string>
+    <string name="dutch">нидерландский</string>
+    <string name="english">английский</string>
+    <string name="estonian">эстонский</string>
+    <string name="finnish">финский</string>
+    <string name="french">французский</string>
+    <string name="georgian">грузинский</string>
+    <string name="german">немецкий</string>
+    <string name="greek">греческий</string>
+    <string name="hungarian">венгерский</string>
+    <string name="icelandic">исландский</string>
+    <string name="irish">ирландский</string>
+    <string name="italian">итальянский</string>
+    <string name="kazakh">казахский</string>
+    <string name="latvian">латышский</string>
+    <string name="lithuanian">литовский</string>
+    <string name="luxembourgish">люксембургский</string>
+    <string name="macedonian">македонский</string>
+    <string name="maltese">мальтийский</string>
+    <string name="moldovan">молдавский</string>
+    <string name="montenegrin">черногорский</string>
+    <string name="norwegian">норвежский</string>
+    <string name="polish">польский</string>
+    <string name="portuguese">португальский</string>
+    <string name="romanian">румынский</string>
+    <string name="russian">русский</string>
+    <string name="serbian">сербский</string>
+    <string name="slovak">словацкий</string>
+    <string name="slovenian">словенский</string>
+    <string name="spanish">испанский</string>
+    <string name="swedish">шведский</string>
+    <string name="turkish">турецкий</string>
+    <string name="ukrainian">украинский</string>
 </resources>

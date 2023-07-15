@@ -19,11 +19,7 @@ class MainActivity : AppCompatActivity() {
                 (application as PGApplication)
                     .serviceLocator
                     .mainCoordinator
-                    .quizCard(
-                        this,
-                        (application as PGApplication)
-                            .serviceLocator.data
-                    )
+                    .gameMode(this)
             },
             1600L
         )
