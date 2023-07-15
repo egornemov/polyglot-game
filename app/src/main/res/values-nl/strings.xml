@@ -16,6 +16,9 @@
     <string name="score_polyglot">Je bent een NATUURLIJKE polyglot.</string>
     <string name="score_not_polyglot">Je bent GEEN polyglot.</string>
     <string name="undefined">Onbepaald</string>
+    <string name="tv_card_description">Kies het niveau</string>
+    <string name="btn_easy">Makkelijk</string>
+    <string name="btn_europe">Europa</string>
     <string name="tv_easy_description">8 talen (Catalaans, Engels, Frans, Duits, Grieks, Italiaans, Spaans, Turks)</string>
     <string name="tv_europe_description">Talen van Europa</string>
     <!-- languages -->

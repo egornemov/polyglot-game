@@ -16,6 +16,9 @@
     <string name="score_polyglot">Ви є ПРИРОДНИМ поліглотом.</string>
     <string name="score_not_polyglot">Ви НЕ поліглот.</string>
     <string name="undefined">Не визначено</string>
+    <string name="tv_card_description">Виберіть рівень</string>
+    <string name="btn_easy">Легко</string>
+    <string name="btn_europe">Європа</string>
     <string name="tv_easy_description">8 мов (каталонська, англійська, французька, німецька, грецька, італійська, іспанська, турецька)</string>
     <string name="tv_europe_description">Мови Європи</string>
     <!-- languages -->

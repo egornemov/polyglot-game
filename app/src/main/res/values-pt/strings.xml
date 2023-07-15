@@ -16,6 +16,9 @@
     <string name="score_polyglot">Você é um poliglota NATURAL.</string>
     <string name="score_not_polyglot">Você NÃO é um poliglota.</string>
     <string name="undefined">Indefinido</string>
+    <string name="tv_card_description">Escolha o nível</string>
+    <string name="btn_easy">Fácil</string>
+    <string name="btn_europe">Europa</string>
     <string name="tv_easy_description">8 idiomas (Catalão, Inglês, Francês, Alemão, Grego, Italiano, Espanhol, Turco)</string>
     <string name="tv_europe_description">Idiomas da Europa</string>
     <!-- languages -->
