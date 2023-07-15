@@ -50,6 +50,17 @@ class ServiceLocator {
             }
         }.shuffled()
 
+    lateinit var mediaPlayers: List<MediaPlayer>
+
     val data: List<Track>
-        get() = tracks
+        get() {
+            val newTracks = tracks
+            mediaPlayers = newTracks.map {
+                val mediaPlayer = MediaPlayer()
+                mediaPlayer.setDataSource(it.url)
+                mediaPlayer.prepareAsync()
+                mediaPlayer
+            }
+            return newTracks
+        }
 }

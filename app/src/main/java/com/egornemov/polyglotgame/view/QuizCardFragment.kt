@@ -31,7 +31,8 @@ class QuizCardFragment : Fragment() {
     var score = 0
     var total = 0
 
-    private var mediaPlayer: MediaPlayer? = MediaPlayer()
+//    private var mediaPlayer: MediaPlayer? = MediaPlayer()
+    private var mediaPlayer: MediaPlayer? = null //? = (activity?.application as PGApplication).serviceLocator.mediaPlayers.get(step)
     private var startPosition: Int = 0
 
     private var startSolutionMs: Long = 0L
@@ -96,6 +97,7 @@ class QuizCardFragment : Fragment() {
         btnRefresh.isVisible = true
         tvRefresh.isVisible = true
 
+        mediaPlayer = (activity?.application as PGApplication).serviceLocator.mediaPlayers.get(step - 1)
         prepareMediaPlayer(pbMediaplayerInit, btnPlay, tvPlay, btnRefresh, tvRefresh)
 
         btnPlay.setOnClickListener {
@@ -112,9 +114,7 @@ class QuizCardFragment : Fragment() {
 
     private fun prepareMediaPlayer(pbMediaplayerInit: ProgressBar, btnPlay: ImageButton, tvPlay: TextView, btnRefresh: ImageButton, tvRefresh: TextView) {
 
-        mediaPlayer?.setDataSource(targetTrack.url)
-        mediaPlayer?.setOnPreparedListener { mp ->
-
+        fun onPrepare(mp: MediaPlayer) {
             pbMediaplayerInit.isVisible = false
             btnPlay.isEnabled = true
             btnPlay.isClickable = true
@@ -127,7 +127,31 @@ class QuizCardFragment : Fragment() {
 
             playTrack(btnPlay, tvPlay)
         }
-        mediaPlayer?.prepareAsync()
+        mediaPlayer?.run {
+            if (duration > 0) {
+                onPrepare(this)
+            } else {
+                setOnPreparedListener {
+                    onPrepare(it)
+                }
+            }
+        }
+//        mediaPlayer?.setDataSource(targetTrack.url)
+//        mediaPlayer?.setOnPreparedListener { mp ->
+//
+//            pbMediaplayerInit.isVisible = false
+//            btnPlay.isEnabled = true
+//            btnPlay.isClickable = true
+//
+//            startPosition = mp.duration / 8 + Random().nextInt(mp.duration / 2)
+//            mp.seekTo(startPosition)
+//
+//            btnRefresh.isVisible = false
+//            tvRefresh.isVisible = false
+//
+//            playTrack(btnPlay, tvPlay)
+//        }
+//        mediaPlayer?.prepareAsync()
     }
 
     private var isResumable = false
