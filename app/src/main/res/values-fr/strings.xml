@@ -6,11 +6,11 @@
     <string name="quiz_description_first">Écoutez la piste et choisissez la langue. C\'est la première sur %d.</string>
     <string name="quiz_description_rest">C\'est la %d sur %d.</string>
     <string name="quiz_playback_status">EN LECTURE (%d sur %d).</string>
-    <string name="score_cheated">Je suis triste que vous ayez sauté certains tests.\nS'il vous plaît, jouez de nouveau avec moi.</string>
+    <string name="score_cheated">Je suis triste que vous ayez sauté certains tests.\nS\'il vous plaît, jouez de nouveau avec moi.</string>
     <string name="score_cheated_share">Passe-temps intelligent, et j\'ai échoué à gagner.</string>
     <string name="score_zero_share">J\'apprendrai %s cette année ! Connaissez-vous %s ?</string>
-    <string name="score_polyglot_share">Je suis un polyglotte NATUREL. Je connais %s.\nJe parie que vous ne l'êtes pas ?</string>
-    <string name="score_not_polyglot_share">Je ne suis PAS un polyglotte.\nJe parie que vous n'en êtes pas un non plus ?</string>
+    <string name="score_polyglot_share">Je suis un polyglotte NATUREL. Je connais %s.\nJe parie que vous ne l\'êtes pas ?</string>
+    <string name="score_not_polyglot_share">Je ne suis PAS un polyglotte.\nJe parie que vous n\'en êtes pas un non plus ?</string>
     <string name="score_stats">Votre score est de %d minutes %d secondes avec %d langues détectées.\n</string>
     <string name="score_zero">Commencez simplement par %s.</string>
     <string name="score_polyglot">Vous êtes un polyglotte NATUREL.</string>
@@ -20,6 +20,7 @@
     <string name="tv_europe_description">Langues d\'Europe</string>
     <!-- languages -->
     <string name="albanian">albanais</string>
+    <string name="armenian">Arménien</string>
     <string name="azerbaijani">azéri</string>
     <string name="belarusian">biélorusse</string>
     <string name="bosnian">bosniaque</string>
