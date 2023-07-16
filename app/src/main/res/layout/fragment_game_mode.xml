@@ -27,8 +27,6 @@
             android:textSize="24sp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/restart_alt_48px"
             android:text="@string/btn_easy" />
 
         <TextView
@@ -46,8 +44,6 @@
             android:textSize="24sp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/restart_alt_48px"
             android:text="@string/btn_europe" />
 
         <TextView

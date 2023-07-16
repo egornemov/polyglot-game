@@ -38,7 +38,7 @@ class QuizCardFragment : Fragment() {
     private var startSolutionMs: Long = 0L
 
     companion object {
-        const val DURATION_S = 20
+        const val DURATION_S = 30
         const val DURATION_MS = 1000 * DURATION_S
     }
 
