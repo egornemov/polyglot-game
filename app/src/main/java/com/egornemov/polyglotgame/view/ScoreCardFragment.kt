@@ -80,7 +80,7 @@ class ScoreCardFragment : Fragment() {
                 resources.getString(R.string.score_polyglot_share, languages)
             } else {
                 resources.getString(R.string.score_not_polyglot_share)
-            }
+            } + " " + resources.getString(R.string.play_market_url)
             shareContent(content)
         }
 

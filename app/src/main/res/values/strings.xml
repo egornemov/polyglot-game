@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Polyglot Game</string>
     <string name="tv_created_by" translatable="false">created by Yehor NEMOV</string>
+    <string name="play_market_url" translatable="false">https://play.google.com/store/apps/details?id=com.egornemov.polyglotgame</string>
     <string name="tv_reset_game">RESET GAME</string>
     <string name="tv_play_again">PLAY AGAIN</string>
     <string name="tv_wait_refresh">Waits too long?\nRefresh.</string>
