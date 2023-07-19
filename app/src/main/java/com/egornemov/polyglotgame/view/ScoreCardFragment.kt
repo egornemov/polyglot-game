@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.egornemov.polyglotgame.BuildConfig
 import com.egornemov.polyglotgame.PGApplication
 import com.egornemov.polyglotgame.R
 
@@ -62,12 +63,18 @@ class ScoreCardFragment : Fragment() {
                     } else {
                         resources.getString(R.string.score_not_polyglot)
                     }
+        } + if (BuildConfig.DEBUG) {
+            val prepTime = QuizCardFragment.preparationTime / 1000f
+            QuizCardFragment.preparationTime = 0
+            " PREP: $prepTime s"
+        } else {
+            ""
         }
 
         btnRestart.setOnClickListener {
             activity?.run {
                 (application as PGApplication).serviceLocator.mainCoordinator
-                    .gameMode(this)
+                    .gameMode()
             }
         }
         btnShareResults.setOnClickListener {

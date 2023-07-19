@@ -18,8 +18,10 @@ class MainActivity : AppCompatActivity() {
                 container.isVisible = true
                 (application as PGApplication)
                     .serviceLocator
-                    .mainCoordinator
-                    .gameMode(this)
+                    .mainCoordinator.run {
+                        context(this@MainActivity)
+                        gameMode()
+                    }
             },
             1600L
         )

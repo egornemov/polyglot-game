@@ -19,8 +19,14 @@ class MainCoordinator {
 
     private lateinit var fragmentManager: FragmentManager
 
-    fun gameMode(activity: FragmentActivity) {
+    lateinit var context: Context
+
+    fun context(activity: FragmentActivity) {
         fragmentManager = activity.supportFragmentManager
+        context = activity.baseContext
+    }
+
+    fun gameMode() {
         navigateToGameMode()
     }
 

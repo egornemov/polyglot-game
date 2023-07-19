@@ -15,10 +15,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.egornemov.polyglotgame.PGApplication
 import com.egornemov.polyglotgame.R
+import com.egornemov.polyglotgame.domain.Data
 import com.egornemov.polyglotgame.domain.Track
+import com.google.auth.oauth2.GoogleCredentials
+import com.google.cloud.storage.Blob
+import com.google.cloud.storage.BlobId
+import com.google.cloud.storage.Storage
+import com.google.cloud.storage.StorageOptions
 import java.util.Random
 import java.util.Timer
 import java.util.TimerTask
+import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 
 
 class QuizCardFragment : Fragment() {
@@ -38,15 +46,19 @@ class QuizCardFragment : Fragment() {
     private var startSolutionMs: Long = 0L
 
     companion object {
+        var preparationTime = 0L
         const val DURATION_S = 30
         const val DURATION_MS = 1000 * DURATION_S
     }
+
+    private var fragmentStart = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        fragmentStart = System.currentTimeMillis()
         val view = inflater.inflate(R.layout.fragment_quiz_card, container, false)
 
         val btnRestart = view.findViewById<ImageButton>(R.id.btn_restart)
@@ -114,12 +126,32 @@ class QuizCardFragment : Fragment() {
 
     private fun prepareMediaPlayer(pbMediaplayerInit: ProgressBar, btnPlay: ImageButton, tvPlay: TextView, btnRefresh: ImageButton, tvRefresh: TextView) {
 
-        fun onPrepare(mp: MediaPlayer) {
+        val startPosition = abs(Random().run {
+            setSeed(targetTrack.url.hashCode().toLong())
+            nextInt(300000)
+        })
+
+        val isNotGcsCase = targetTrack.url.contains("https://")
+
+        fun onPrepared(mp: MediaPlayer) {
+            preparationTime += System.currentTimeMillis() - fragmentStart
+
+            if (isNotGcsCase && step < total) {
+                var nextMp: MediaPlayer? = (activity?.application as PGApplication).serviceLocator.mediaPlayers.get(step)
+                if (nextMp == null) {
+                    nextMp = MediaPlayer()
+                    nextMp.setDataSource(restOfTracks.first().url)
+                    nextMp.prepareAsync()
+                    (activity?.application as PGApplication).serviceLocator.mediaPlayers[step] = nextMp
+                }
+            }
+
             pbMediaplayerInit.isVisible = false
             btnPlay.isEnabled = true
             btnPlay.isClickable = true
 
-            startPosition = mp.duration / 8 + Random().nextInt(mp.duration / 2)
+//            startPosition = mp.duration / 8 + Random().nextInt(mp.duration / 2)
+//            startPosition = Random().nextInt(300000)
             mp.seekTo(startPosition)
 
             btnRefresh.isVisible = false
@@ -129,12 +161,71 @@ class QuizCardFragment : Fragment() {
         }
         mediaPlayer?.run {
             if (duration > 0) {
-                onPrepare(this)
+                onPrepared(this)
             } else {
                 setOnPreparedListener {
-                    onPrepare(it)
+                    onPrepared(it)
                 }
             }
+        } ?: run {
+            val workerThread = object : Thread() {
+
+                override fun run() {
+                    mediaPlayer = MediaPlayer()
+                    val url = if (targetTrack.url.contains("https://")) {
+                        targetTrack.url
+                    } else {
+                        val credentialsInputStream = resources.openRawResource(R.raw.service_account_key)
+                        val credentials = GoogleCredentials.fromStream(credentialsInputStream)
+                        // Create a Storage instance
+                        val storage: Storage = StorageOptions.newBuilder()
+                            .setProjectId(Data.PROJECT_ID)
+                            .setCredentials(credentials)
+                            .build()
+                            .service
+
+                        val bucketName = Data.BUCKET_NAME
+
+                        val folder = if (startPosition < 30000) {
+                            "0000"
+                        } else if (startPosition < 60000) {
+                            "0030"
+                        } else if (startPosition < 90000) {
+                            "0100"
+                        } else if (startPosition < 120000) {
+                            "0130"
+                        } else if (startPosition < 150000) {
+                            "0200"
+                        } else if (startPosition < 180000) {
+                            "0230"
+                        } else if (startPosition < 210000) {
+                            "0300"
+                        } else if (startPosition < 240000) {
+                            "0330"
+                        } else if (startPosition < 270000) {
+                            "0400"
+                        } else if (startPosition < 300000) {
+                            "0430"
+                        } else {
+                            "0000"
+                        }
+
+                        val objectName = "${Data.BUCKET_PREFIX}/${folder}/${targetTrack.url}"
+                        val duration = 3600 // Expiration time in seconds
+
+                        val blobId = BlobId.of(bucketName, objectName)
+                        val blob: Blob = storage.get(blobId)
+                        val signedUrl: String = blob.signUrl(duration.toLong(), TimeUnit.SECONDS).toString()
+                        signedUrl
+                    }
+                    mediaPlayer?.setDataSource(url)
+                    mediaPlayer?.setOnPreparedListener {
+                        onPrepared(it)
+                    }
+                    mediaPlayer?.prepareAsync()
+                }
+            }
+            workerThread.start()
         }
 //        mediaPlayer?.setDataSource(targetTrack.url)
 //        mediaPlayer?.setOnPreparedListener { mp ->
@@ -153,6 +244,8 @@ class QuizCardFragment : Fragment() {
 //        }
 //        mediaPlayer?.prepareAsync()
     }
+
+
 
     private var isResumable = false
     private var isPausedFragment = false
@@ -257,6 +350,7 @@ class QuizCardFragment : Fragment() {
             buttons.get(index).run {
                 text = getStringByResName(context, pair.first)
                 setOnClickListener {
+                    mediaPlayer?.stop()
                     mediaPlayer?.release()
                     mediaPlayer = null
                     val currenSolutionTimeMs = System.currentTimeMillis() - startSolutionMs

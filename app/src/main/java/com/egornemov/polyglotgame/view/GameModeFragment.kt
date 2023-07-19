@@ -19,6 +19,7 @@ class GameModeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_game_mode, container, false)
 
         val btnEasy = view.findViewById<Button>(R.id.btn_easy)
+        val btnGcsEasy = view.findViewById<Button>(R.id.btn_gcs_easy)
         val btnEurope = view.findViewById<Button>(R.id.btn_europe)
 
         btnEasy.setOnClickListener {
@@ -29,6 +30,17 @@ class GameModeFragment : Fragment() {
                     .quizCard(
                         (application as PGApplication)
                             .serviceLocator.easyData
+                    )
+            }
+        }
+        btnGcsEasy.setOnClickListener {
+            activity?.run {
+                (application as PGApplication)
+                    .serviceLocator
+                    .mainCoordinator
+                    .quizCard(
+                        (application as PGApplication)
+                            .serviceLocator.gcsEasyData
                     )
             }
         }

@@ -39,9 +39,19 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    packagingOptions {
+        exclude("META-INF/*")
+    }
 }
 
 dependencies {
+
+
+    implementation("com.google.cloud:google-cloud-storage:2.1.0")
+    implementation("com.google.auth:google-auth-library-oauth2-http:1.1.0")
+    implementation("io.grpc:grpc-okhttp:1.43.0")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
+
     implementation(platform("com.google.firebase:firebase-bom:32.1.0"))
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")

@@ -38,6 +38,23 @@
             android:layout_margin="8dp" />
 
         <Button
+            android:id="@+id/btn_gcs_easy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="GCS EASY" />
+
+        <TextView
+            android:id="@+id/tv_gcs_easy"
+            android:text="GCS EASY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:layout_margin="8dp" />
+
+        <Button
             android:id="@+id/btn_europe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
