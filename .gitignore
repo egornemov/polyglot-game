@@ -31,3 +31,7 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+app/src/google-services.json
+app/src/main/res/raw/service_account_key.json
+app/src/main/java/com/egornemov/polyglotgame/domain/DataSources.kt

@@ -1,2 +1,4 @@
 /build
 /src/google-services.json
+/src/main/res/raw/service_account_key.json
+/src/main/java/com/egornemov/polyglotgame/domain/DataSources.kt

@@ -1,9 +1,8 @@
 package com.egornemov.polyglotgame
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
@@ -12,18 +11,22 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        Handler(mainLooper).postDelayed(
-            {
-                val container = findViewById<FrameLayout>(R.id.fragment_container)
-                container.isVisible = true
-                (application as PGApplication)
-                    .serviceLocator
-                    .mainCoordinator.run {
-                        context(this@MainActivity)
-                        gameMode()
-                    }
-            },
-            1600L
-        )
+        (application as PGApplication)
+            .serviceLocator
+            .mainCoordinator.run {
+                context(this@MainActivity)
+            }
+
+        (application as PGApplication)
+            .serviceLocator.prepareEuropeData {
+                runOnUiThread {
+                    val container = findViewById<FrameLayout>(R.id.fragment_container)
+                    container.isVisible = true
+                    (application as PGApplication)
+                        .serviceLocator
+                        .mainCoordinator
+                        .gameMode()
+                }
+            }
     }
 }

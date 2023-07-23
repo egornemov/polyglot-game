@@ -15,17 +15,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.egornemov.polyglotgame.PGApplication
 import com.egornemov.polyglotgame.R
-import com.egornemov.polyglotgame.domain.Data
 import com.egornemov.polyglotgame.domain.Track
-import com.google.auth.oauth2.GoogleCredentials
-import com.google.cloud.storage.Blob
-import com.google.cloud.storage.BlobId
-import com.google.cloud.storage.Storage
-import com.google.cloud.storage.StorageOptions
 import java.util.Random
 import java.util.Timer
 import java.util.TimerTask
-import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 
@@ -39,8 +32,7 @@ class QuizCardFragment : Fragment() {
     var score = 0
     var total = 0
 
-//    private var mediaPlayer: MediaPlayer? = MediaPlayer()
-    private var mediaPlayer: MediaPlayer? = null //? = (activity?.application as PGApplication).serviceLocator.mediaPlayers.get(step)
+    private var mediaPlayer: MediaPlayer? = null
     private var startPosition: Int = 0
 
     private var startSolutionMs: Long = 0L
@@ -126,12 +118,16 @@ class QuizCardFragment : Fragment() {
 
     private fun prepareMediaPlayer(pbMediaplayerInit: ProgressBar, btnPlay: ImageButton, tvPlay: TextView, btnRefresh: ImageButton, tvRefresh: TextView) {
 
-        val startPosition = abs(Random().run {
-            setSeed(targetTrack.url.hashCode().toLong())
-            nextInt(300000)
-        })
-
         val isNotGcsCase = targetTrack.url.contains("https://")
+
+        val startPosition = if (isNotGcsCase && false) {
+            abs(Random().run {
+                setSeed(targetTrack.url.hashCode().toLong())
+                nextInt(300000)
+            })
+        } else {
+            0
+        }
 
         fun onPrepared(mp: MediaPlayer) {
             preparationTime += System.currentTimeMillis() - fragmentStart
@@ -150,8 +146,6 @@ class QuizCardFragment : Fragment() {
             btnPlay.isEnabled = true
             btnPlay.isClickable = true
 
-//            startPosition = mp.duration / 8 + Random().nextInt(mp.duration / 2)
-//            startPosition = Random().nextInt(300000)
             mp.seekTo(startPosition)
 
             btnRefresh.isVisible = false
@@ -167,85 +161,8 @@ class QuizCardFragment : Fragment() {
                     onPrepared(it)
                 }
             }
-        } ?: run {
-            val workerThread = object : Thread() {
-
-                override fun run() {
-                    mediaPlayer = MediaPlayer()
-                    val url = if (targetTrack.url.contains("https://")) {
-                        targetTrack.url
-                    } else {
-                        val credentialsInputStream = resources.openRawResource(R.raw.service_account_key)
-                        val credentials = GoogleCredentials.fromStream(credentialsInputStream)
-                        // Create a Storage instance
-                        val storage: Storage = StorageOptions.newBuilder()
-                            .setProjectId(Data.PROJECT_ID)
-                            .setCredentials(credentials)
-                            .build()
-                            .service
-
-                        val bucketName = Data.BUCKET_NAME
-
-                        val folder = if (startPosition < 30000) {
-                            "0000"
-                        } else if (startPosition < 60000) {
-                            "0030"
-                        } else if (startPosition < 90000) {
-                            "0100"
-                        } else if (startPosition < 120000) {
-                            "0130"
-                        } else if (startPosition < 150000) {
-                            "0200"
-                        } else if (startPosition < 180000) {
-                            "0230"
-                        } else if (startPosition < 210000) {
-                            "0300"
-                        } else if (startPosition < 240000) {
-                            "0330"
-                        } else if (startPosition < 270000) {
-                            "0400"
-                        } else if (startPosition < 300000) {
-                            "0430"
-                        } else {
-                            "0000"
-                        }
-
-                        val objectName = "${Data.BUCKET_PREFIX}/${folder}/${targetTrack.url}"
-                        val duration = 3600 // Expiration time in seconds
-
-                        val blobId = BlobId.of(bucketName, objectName)
-                        val blob: Blob = storage.get(blobId)
-                        val signedUrl: String = blob.signUrl(duration.toLong(), TimeUnit.SECONDS).toString()
-                        signedUrl
-                    }
-                    mediaPlayer?.setDataSource(url)
-                    mediaPlayer?.setOnPreparedListener {
-                        onPrepared(it)
-                    }
-                    mediaPlayer?.prepareAsync()
-                }
-            }
-            workerThread.start()
         }
-//        mediaPlayer?.setDataSource(targetTrack.url)
-//        mediaPlayer?.setOnPreparedListener { mp ->
-//
-//            pbMediaplayerInit.isVisible = false
-//            btnPlay.isEnabled = true
-//            btnPlay.isClickable = true
-//
-//            startPosition = mp.duration / 8 + Random().nextInt(mp.duration / 2)
-//            mp.seekTo(startPosition)
-//
-//            btnRefresh.isVisible = false
-//            tvRefresh.isVisible = false
-//
-//            playTrack(btnPlay, tvPlay)
-//        }
-//        mediaPlayer?.prepareAsync()
     }
-
-
 
     private var isResumable = false
     private var isPausedFragment = false
@@ -288,7 +205,6 @@ class QuizCardFragment : Fragment() {
                 var count = 0
 
                 override fun run() {
-                    count++
                     handler.post {
                         if (count > DURATION_S) {
                             positionUpdater.cancel()
@@ -301,18 +217,20 @@ class QuizCardFragment : Fragment() {
                             }
                         }
                     }
+                    count++
                 }
             }
-            positionUpdater.scheduleAtFixedRate(positionUpdate, 1000, 1000)
-
-
+            positionUpdater.scheduleAtFixedRate(positionUpdate, 0, 1000)
 
             // Stop playback after the desired duration
             handler.postDelayed({
                 if (mediaPlayer != null) {
-                    mediaPlayer?.pause()
-                    mediaPlayer?.seekTo(startPosition) // Reset position for future playback
-
+                    try {
+                        mediaPlayer?.pause()
+                        mediaPlayer?.seekTo(startPosition) // Reset position for future playback
+                    } catch (e: IllegalStateException) {
+                        mediaPlayer = null
+                    }
                     btnPlay.isEnabled = true
                     btnPlay.isClickable = true
                 }
@@ -343,7 +261,7 @@ class QuizCardFragment : Fragment() {
         val list = mutableListOf<Pair<String, Boolean>>()
         list.apply {
             add(targetTrack.answer to true)
-            targetTrack.choices.filter { it != targetTrack.answer }.shuffled().subList(0, 3).map { it to false }.let { it ->
+            targetTrack.choices.filter { it != targetTrack.answer }.shuffled().subList(0, buttons.size - 1).map { it to false }.let { it ->
                 addAll(it)
             }
         }.shuffled().forEachIndexed { index, pair ->
@@ -369,6 +287,5 @@ class QuizCardFragment : Fragment() {
             }
         }
     }
-
 
 }

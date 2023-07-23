@@ -20,14 +20,28 @@
             android:layout_margin="16dp"
             android:text="@string/tv_card_description" />
 
-        <Button
-            android:id="@+id/btn_easy"
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/btn_easy" />
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_easy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                android:clickable="false"
+                android:enabled="false"
+                android:text="@string/btn_easy" />
+
+            <ProgressBar
+                android:translationY="8dp"
+                android:id="@+id/pb_easy"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/tv_easy"
@@ -37,31 +51,47 @@
             android:textColor="@android:color/darker_gray"
             android:layout_margin="8dp" />
 
-        <Button
-            android:id="@+id/btn_gcs_easy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="GCS EASY" />
+<!--        <Button-->
+<!--            android:visibility="gone"-->
+<!--            android:id="@+id/btn_gcs_easy"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="24sp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:text="GCS EASY" />-->
 
-        <TextView
-            android:id="@+id/tv_gcs_easy"
-            android:text="GCS EASY"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
-            android:layout_margin="8dp" />
+<!--        <TextView-->
+<!--            android:visibility="gone"-->
+<!--            android:id="@+id/tv_gcs_easy"-->
+<!--            android:text="GCS EASY"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@android:color/darker_gray"-->
+<!--            android:layout_margin="8dp" />-->
 
-        <Button
-            android:id="@+id/btn_europe"
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/btn_europe" />
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_europe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                android:clickable="false"
+                android:enabled="false"
+                android:text="@string/btn_europe" />
+
+            <ProgressBar
+                android:translationY="8dp"
+                android:id="@+id/pb_europe"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/tv_europe"
@@ -70,6 +100,132 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/darker_gray"
             android:layout_margin="8dp" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_slavic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                android:clickable="false"
+                android:enabled="false"
+                android:text="@string/btn_slavic" />
+
+            <ProgressBar
+                android:translationY="8dp"
+                android:id="@+id/pb_slavic"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_slavic"
+            android:text="@string/tv_slavic_europe_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:layout_margin="8dp" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_germanic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                android:clickable="false"
+                android:enabled="false"
+                android:text="@string/btn_germanic" />
+
+            <ProgressBar
+                android:translationY="8dp"
+                android:id="@+id/pb_germanic"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_germanic"
+            android:text="@string/tv_germanic_europe_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:layout_margin="8dp" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_romance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                android:clickable="false"
+                android:enabled="false"
+                android:text="@string/btn_romance" />
+
+            <ProgressBar
+                android:id="@+id/pb_romance"
+                android:layout_gravity="center"
+                android:translationY="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_romance"
+            android:text="@string/tv_romance_europe_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:layout_margin="8dp" />
+
+<!--        <FrameLayout-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btn_gcs_europe"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="24sp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginBottom="8dp"-->
+<!--                android:clickable="false"-->
+<!--                android:enabled="false"-->
+<!--                android:text="GCS EUROPE" />-->
+
+<!--            <ProgressBar-->
+<!--                android:id="@+id/pb_gcs_europe"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
+
+<!--        </FrameLayout>-->
+
+<!--        <TextView-->
+<!--            android:visibility="gone"-->
+<!--            android:id="@+id/tv_gcs_europe"-->
+<!--            android:text="GCS EUROPE"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@android:color/darker_gray"-->
+<!--            android:layout_margin="8dp" />-->
 
     </LinearLayout>
 

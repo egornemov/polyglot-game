@@ -23,6 +23,12 @@
     <string name="btn_europe">Europa</string>
     <string name="tv_easy_description">8 Sprachen (Katalanisch, Englisch, Französisch, Deutsch, Griechisch, Italienisch, Spanisch, Türkisch)</string>
     <string name="tv_europe_description">Sprachen Europas</string>
+    <string name="btn_slavic">Slawische Sprachen</string>
+    <string name="btn_germanic">Germanische Sprachen</string>
+    <string name="btn_romance">Romanische Sprachen</string>
+    <string name="tv_slavic_europe_description">Slawische Sprachen Europas</string>
+    <string name="tv_germanic_europe_description">Germanische Sprachen Europas</string>
+    <string name="tv_romance_europe_description">Romanische Sprachen Europas</string>
     <!-- languages -->
     <string name="albanian">Albanisch</string>
     <string name="armenian">Armenisch</string>

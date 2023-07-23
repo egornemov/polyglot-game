@@ -2,7 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="holo_orange_light_1f">#1fffbb33</color>
+    <color name="red_light_0f">#0FFF0000</color>
+    <color name="orange_light_0f">#0Fffbb33</color>
+    <color name="yellow_light_0f">#0FFFFF00</color>
+    <color name="green_light_0f">#0F00FF00</color>
+    <color name="blue_light_0f">#0F0000FF</color>
+    <color name="indigo_light_0f">#0F4B00BB</color>
+    <color name="violet_light_0f">#0F9400BB</color>
     <color name="splash_background">#0056B9</color>
     <color name="splash_logo">#FFD800</color>
 </resources>
